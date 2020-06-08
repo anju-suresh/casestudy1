@@ -88,13 +88,15 @@ function openCity(evt, cityName) {
             mar.innerHTML="Goals For Today Completed"
             document.getElementById("one").src="./css/images/celee.jpg"
             resolve("Congrats.");
+          }else{
+            
+            reject("Not Completed! 'Complete atleast 5 Task'");
           }
-        }else{
-         reject("Not Completed");
         }
       });
       promise
       .then(function(s) {alert(s +"5 Tasks have been Successfully Completed");})
-      .catch(function(e){alert(e);})
+      .catch(function(e){let mar=document.getElementById("marq");
+      mar.innerHTML="Goals For Today" +'"{'+ e +'}"'})
     }
 
