@@ -1,5 +1,5 @@
 
-
+// active Navbar 
 function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -17,16 +17,13 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
   }
-
+  //  ToDo List Dispaly JavaScript
   function todoList(){
     console.log("todolist");
     var xhttp=new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-
         if (this.readyState == 4 && this.status == 200) {
-            var todo= JSON.parse(this.responseText);
-            
-          
+          var todo= JSON.parse(this.responseText); 
           var txt="";
           txt += "<table border='6' class ='table table-striped' id='myTable'>"
           txt +="<tbody>"
@@ -58,30 +55,32 @@ function openCity(evt, cityName) {
     xhttp.send();
     
     }
-  
+  // To Do List Ends
+  //  Inputing Checkbox Dynamically
     function check(x){
       if(x==true){
         return '<input type="checkbox" name="status" checked>'
       }else{
         
-        return '<input type="checkbox" name="status" id ="check" onclick="task(); callbacks();">'
+        return '<input type="checkbox" class="check" name="status" id ="check" onclick="task(); ">'
         
       }
     }
    
+    // Task Complete or not checking using promise function 
+
     var  count=1;
     function task(){
       var promise = new Promise(function(resolve,reject){
-       var stat = document.getElementById("check");
-
-       console.log(stat.value);
-       
-       if(stat.value=="on"){
-        // document.getElementById("complete").innerHTML="true";
- 
-           count++;
-           
-          console.log(count);
+        var stat = document.getElementById("check");
+        $(document).on('change', '.check', function() {
+          var row = $(this).closest('tr');
+          if($(this). prop("checked") == true){
+            row.find('#complete').html('true');
+          }
+        });
+        if(stat.value=="on"){
+          count++; 
           if(count>=6){
             let tab=document.getElementById("todo");
             tab.style.backgroundImage = "url('./css/images/cele.gif')";
@@ -89,22 +88,13 @@ function openCity(evt, cityName) {
             mar.innerHTML="Goals For Today Completed"
             document.getElementById("one").src="./css/images/celee.jpg"
             resolve("Congrats.");
-            console.log("completed");
           }
-       }else{
+        }else{
          reject("Not Completed");
-       }
+        }
+      });
+      promise
+      .then(function(s) {alert(s +"5 Tasks have been Successfully Completed");})
+      .catch(function(e){alert(e);})
+    }
 
-  });
-  promise
-   .then(function(s) {alert(s +"5 Tasks have been Successfully Completed");})
-   .catch(function(e){alert(e);})
-}
-
-function callbacks(){
-  console.log("callbacks");
-  if(document.getElementById("check").checked){
-    console.log("callbacks if");
-    document.getElementById("complete").innerText="true";
-  }
-}

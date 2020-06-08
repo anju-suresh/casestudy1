@@ -11,6 +11,8 @@ body{
     border: transparent;
     background-color: transparent;
     margin: 0px;
+    position: relative;
+    display: flex;
 }
 #tab1{
     margin-left: 80%;
@@ -22,6 +24,7 @@ body{
     font-size: 110px;
     color: royalblue;
     padding: 10px;
+   
 
 
 }
@@ -57,13 +60,14 @@ body{
     /* margin-top: 10px; */
     padding-top: 0px;
     font-size: 48px;
-    background: -webkit-linear-gradient(rgb(61, 175, 76), rgb(218, 48, 48));
+    background: -webkit-linear-gradient(rgb(37, 107, 47), rgb(160, 18, 18),rgb(134, 151, 35),rgb(25, 25, 143));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
     position: relative;
     width: 300px;
     margin-left: 35%;;
 }
+
 #one{
     margin-top: 0px;
     height: 100px;
