@@ -57,48 +57,51 @@ function openCity(evt, cityName) {
     }
   // To Do List Ends
   //  Inputing Checkbox Dynamically
-    function check(x){
-      if(x==true){
-        return '<input type="checkbox" name="status" checked disabled>'
-      }else{
+  function check(x){
+    if(x==true){
+      return '<input type="checkbox" checked disabled>'
+    }else{
+      
+      
+      $(document).ready(function(){
+        var count=0;
+        $("input").change(function(){
         
-        return '<input type="checkbox" class="check" name="status" id ="check" onclick="task(); ">'
-        
-      }
-    }
-   
-    // Task Complete or not checking using promise function 
+         
+            if($(this).is(":checked")){
+              count++;
+              console.log(count +"count");
+            }else{
+              count--;
+              console.log(count +"count");
+            }
+            var promise = new Promise(function(resolve,reject){
 
-    var  count=1;
-    function task(){
-      var promise = new Promise(function(resolve,reject){
-        var stat = document.getElementById("check");
-        $(document).on('change', '.check', function() {
-          var row = $(this).closest('tr');
-          if($(this). prop("checked") == true){
-            row.find('#complete').html('true');
-          }else{
-            row.find('#complete').html('flase');
-          }
+                if(count==5){
+                let tab=document.getElementById("todo");
+                tab.style.backgroundImage = "url('./css/images/cele.gif')";
+                let mar=document.getElementById("marq");
+                mar.innerHTML="Goals For Today Completed"
+                document.getElementById("one").src="./css/images/celee.jpg"
+                setTimeout(()=>{ resolve("Congrats.");},500);
+              }else if(count<=5){
+                reject("Not Completed! 'Complete atleast 5 Task'");
+              }
+          });
+          promise
+          .then(function(s) {alert(s +"5 Tasks have been Successfully Completed");})
+          .catch(function(e){let mar=document.getElementById("marq"); mar.innerHTML="Goals For Today" +'"{'+ e +'}"'})
+          
+            var row = $(this).closest('tr');
+            if($(this). prop("checked") == true){
+              row.find('#complete').html('true');
+            }else{
+              row.find('#complete').html('flase');
+            }
+          });
         });
-        if(stat.value=="on"){
-          count++; 
-          if(count>=6){
-            let tab=document.getElementById("todo");
-            tab.style.backgroundImage = "url('./css/images/cele.gif')";
-            let mar=document.getElementById("marq");
-            mar.innerHTML="Goals For Today Completed"
-            document.getElementById("one").src="./css/images/celee.jpg"
-            resolve("Congrats.");
-          }else{
-            
-            reject("Not Completed! 'Complete atleast 5 Task'");
-          }
-        }
-      });
-      promise
-      .then(function(s) {alert(s +"5 Tasks have been Successfully Completed");})
-      .catch(function(e){let mar=document.getElementById("marq");
-      mar.innerHTML="Goals For Today" +'"{'+ e +'}"'})
+        return '<input type="checkbox" class="check" name="status" id ="check">'
     }
+  }
+ 
 
