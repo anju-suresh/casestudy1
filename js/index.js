@@ -59,7 +59,7 @@ function openCity(evt, cityName) {
   //  Inputing Checkbox Dynamically
     function check(x){
       if(x==true){
-        return '<input type="checkbox" name="status" checked>'
+        return '<input type="checkbox" name="status" checked disabled>'
       }else{
         
         return '<input type="checkbox" class="check" name="status" id ="check" onclick="task(); ">'
@@ -77,6 +77,8 @@ function openCity(evt, cityName) {
           var row = $(this).closest('tr');
           if($(this). prop("checked") == true){
             row.find('#complete').html('true');
+          }else{
+            row.find('#complete').html('flase');
           }
         });
         if(stat.value=="on"){
